@@ -1,0 +1,104 @@
+#--------------------20220927----------------------------------------
+#Nagybetűsség vizsgálata: isupper()
+    #változó.isupper() --> True/False
+    #Pl.: betu = "S" --> betu.isupper --> True
+#Hozzáfűzés: append()
+    #a = [2,3]
+    #b = [4,5]
+    #B-t csatoljuk hozzá a-hoz:
+    #a.append(b)    <-- mihez.append(mit)
+#Indexkeresés:
+    #index()
+    #Pl.:
+         #betűtömb = ["a","b","c"]
+         #              0   1   2 (indexek)
+         #Keressük meg "b" indexét.
+         #betűtömb.index("b")
+         #HolKeresse.index(MinekAzIndexeKell)
+#-------------------------------------------------
+#Feladat:Függvénnyel vizsgáljunk egy szöveget.
+        #A megoldás egy lista legyen, ami a szó
+        #nagybetűinek az indexeit tartalmazza.
+        #Pl.: ("eQuINoX") -> [1, 3, 4, 6]
+        #     ("efhwgs") -> []
+
+def holazindex(szoveg):
+    indexek = []#Ebbe kerülnek majd az indexek
+    for betu in szoveg:#Végigmegy a szó betűin
+        if betu.isupper():#Ha az a betű nagy
+            #Akkor annak az indexét feljegyzi:
+            indexek.append(szoveg.index(betu))
+    return indexek
+            
+    
+print(holazindex("eQuINoX")) #[1, 3, 4, 6]
+#print(holazindex("eQuINoX")) #[0, 2, 4, 5, 0]
+print(holazindex("efhwgs"))
+#-------------------------------------------------
+#megfordit(True) -> False
+#megfordit(False) -> True
+#megfordit(0) -> "bool kellene"
+def megfordit(a):
+    if type(a) is not bool:
+#type(VizsgálandóVáltozó)
+#is not: ugyazaz, mint a !=
+        return "bool kellene"
+    if a == False:
+        return True
+    if a == True:
+        return False
+
+print(megfordit(True))
+print(megfordit(False))
+print(megfordit(0))
+
+#-------------------------------------------------
+#Hosszúságvizsgálat:
+    #len()
+    #Pl.: a = "val" --> len(a) = 3
+#-----
+#Karaktergyűjtemény:
+    #set()
+    #b = "alma" --> set(b) --> ["a","l","m"]
+    #A gyűjteményben csak egyszer szerepel
+    #minden betű, hiába fordul elő többször
+    #a szövegen belül
+#-------------------------------------------------
+#Feladat: A függvény vizsgáljon meg 2 szót.
+         #Hány olyan betű van, ami mindkettőben szerepel?
+         #Pl: közös("alma", "hal") -> 2 ("a" és "l")
+         
+def kozos(a, b):
+    lista = [] #ebbe mennek majd a közös betűk
+    for i in set(a): #1 set-ben 1 betű csak 1x szerepelhet
+        for j in set(b):
+            if i in j: # if i == j:
+#Egyezéskor fűzze hozzá a talált betűt:
+                lista.append(j)
+#Az egyezések számát a lista hossza adja:
+    return len(lista)
+
+print(kozos("alma","hal"))
+#-------------------------------------------------
+#-------------------------------------------------
+#Feladat: Hány darab lista van a főlistában?
+#Pl.: ([[1, 2, 3]]) -> 1 VAGY ([[2,3],[1,6]]) -> 2 
+#Segítség:
+#        -count() --> változó.count('dolog')
+#        -type() --> típusvizsgálat
+#        -str() --> szöveggé konvertálás
+
+def listaszam(nagylista):
+    szamol = 0
+    for kislista in nagylista:
+        if type(kislista) == list: #Ha lista típusú
+            szamol += 1
+    return szamol
+#---VAGY---
+def listaszam2(lista):
+    return str(lista).count('[') - 1
+#-1 a főlista miatt, ami mident magába foglal
+#stringként értelmezzük, mert a számon nem tud végigmenni
+
+print(listaszam([[2,3],[1,6]]))
+print(listaszam2([[2,3],[1,6]]))
